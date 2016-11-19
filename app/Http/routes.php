@@ -19,3 +19,10 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+//1. RESTful Resource Client Controller
+Route::resource('clients', 'ClientController');
+//2. RESTful Resource Car Controller
+Route::resource('cars', 'CarController');
+//3. RESTful Resource Rental Controller
+Route::resource('rentals', 'RentalController');
