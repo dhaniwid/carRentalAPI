@@ -19,3 +19,6 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+// RESTful Resource Client Controller
+Route::resource('clients', 'ClientController');
