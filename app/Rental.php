@@ -3,11 +3,11 @@
 /**
  * Created by: Ramadhani Widodo
  * Created date: 19 November 2016
- * Description: Car Model, created on #661 Ticket
+ * Description: Rental Model, created on #664 Ticket
  */
 
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model {
-    protected $table = "cars";
+class Rental extends Model {
+    protected $table = "rentals";
 }

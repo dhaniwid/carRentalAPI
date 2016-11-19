@@ -46,7 +46,7 @@ class CarController extends Controller {
             // #661-Crud-Car
             // Post new created car here
             // get POST value here
-            $new_data = Request::all();
+            //$new_data = Request::all();
             // validate them
             $result = $this->customValidation($new_data);
             
