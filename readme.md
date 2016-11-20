@@ -1,7 +1,5 @@
 ## Car Rental API
-
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Tickets Done]] 8
+Total Tickets Done: 8
 
 This Car Rental API is built by using Laravel 5.0 framework for the purpose of pre-test interview held by one company. 
 
