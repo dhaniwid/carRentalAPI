@@ -17,6 +17,9 @@ Here are following tickets that have been done:
 
 This Car Rental API being tested by using Google Chrome Advanced Rest Client app.
 
++ Current database name and configuration are set to local. Database name: car_rental_api, localhost.
++ Run Migration and Seeding (php artisan migrate and php artisan db:seed)
+
 ### Notes
 As for this ticket: http://redmine.byte-stack.net/issues/669 and http://redmine.byte-stack.net/issues/663
 Due to laravel standard about route parameters is different, there is a slight difference of using it:
