@@ -16,6 +16,8 @@ Route::get('home', 'HomeController@index');
 
 // 4. Available Car Information
 Route::get('cars/free/date={date}', 'RentalController@getAvailableCars');
+// 5. Rented Car Information
+Route::get('cars/rented/date={date}', 'RentalController@getRentedCars');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

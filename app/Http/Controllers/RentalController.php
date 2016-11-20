@@ -285,7 +285,7 @@ class RentalController extends Controller {
             }
             
             // check whether car is being rented at selected date
-            $cars = DB::select("select c.* 
+            $cars = DB::select("select c.brand, c.type, c.plate
                         from rentals r 
                         left join cars c on c.id = r.car_id
                         where 1=1
@@ -296,6 +296,30 @@ class RentalController extends Controller {
                 return array("date" => $date, "free_cars" => $cars);
             } else {
                 return array("date" => $date, "free_cars" => "No cars available");
+            }
+        }
+        
+        /*
+         * 668-Rented-Car-Information
+         */
+        public function getRentedCars ($date) {
+            // check date format
+            if (!$this->validateDate($date)) {
+                return "Please set date on correct format (DD-MM-YYYY)";
+            }
+            
+            // check whether car is being rented at selected date
+            $cars = DB::select("select c.brand, c.type, c.plate 
+                        from rentals r 
+                        left join cars c on c.id = r.car_id
+                        where 1=1
+                        and r.car_id IN (select car_id from rentals 
+                        where date_format(date_from, '%d-%m-%Y') = ? or date_format(date_to, '%d-%m-%Y') = ?);", array($date, $date));
+            
+            if ($cars) {
+                return array("date" => $date, "rented_cars" => $cars);
+            } else {
+                return array("date" => $date, "rented_cars" => "No cars rented");
             }
         }
         
