@@ -324,10 +324,10 @@ class RentalController extends Controller {
         }
         
         // validating date
-        public function validateDate ($date) {
-            $d = \DateTime::createFromFormat('d-m-Y', $date);
+        public function validateDate ($date, $format = 'd-m-Y') {
+            $d = \DateTime::createFromFormat($format, $date);
             
-            if ($d && $d->format('d-m-Y') == $date) {
+            if ($d && $d->format($format) == $date) {
                 return TRUE;
             } else {
                 return FALSE;
@@ -359,6 +359,42 @@ class RentalController extends Controller {
                 return $histories;
             } else {
                 return "Client doesn't exist!";
+            }
+        }
+        
+        /*
+         * #663 - Car Rental History
+         */
+        public function getCarHistory ($id, $date) {
+            $histories = array();
+            $error_messages = array();
+            
+            if (!$this->validateDate($date, "m-Y")) {
+                return  "Date format should be 'MM-YYYY'";
+            }
+            
+            $car = \App\Car::where('id', '=', $id)->first();
+            // check if exists
+            if ($car) {
+                // validate date format
+                $histories['id'] = $car->id;
+                $histories['brand'] = $car->brand;
+                $histories['type'] = $car->type;
+                $histories['plate'] = $car->plate;
+                
+                $rentals = DB::select("select u.name as rent_by, r.date_from, r.date_to
+                            from rentals r 
+                            left join clients u on u.id = r.client_id
+                            left join cars c on c.id = r.car_id
+                            where 1=1 
+                            AND r.car_id = ?
+                            AND date_format(r.date_from, '%m-%Y') = ?", array($id, $date));
+                
+                $histories['histories'] = $rentals;
+                
+                return $histories;
+            } else {
+                return  "Car doesn't exist!";
             }
         }
 }

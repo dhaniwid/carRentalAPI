@@ -20,6 +20,8 @@ Route::get('cars/free/date={date}', 'RentalController@getAvailableCars');
 Route::get('cars/rented/date={date}', 'RentalController@getRentedCars');
 // 6. Client Rental History
 Route::get('histories/client/{id}', 'RentalController@getClientHistory');
+// 7. Car Rental History
+Route::get('histories/car/{id}/month={month}', 'RentalController@getCarHistory');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
