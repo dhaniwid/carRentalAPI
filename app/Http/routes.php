@@ -18,6 +18,8 @@ Route::get('home', 'HomeController@index');
 Route::get('cars/free/date={date}', 'RentalController@getAvailableCars');
 // 5. Rented Car Information
 Route::get('cars/rented/date={date}', 'RentalController@getRentedCars');
+// 6. Client Rental History
+Route::get('histories/client/{id}', 'RentalController@getClientHistory');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

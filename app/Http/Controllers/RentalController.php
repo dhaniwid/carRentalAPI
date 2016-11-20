@@ -324,13 +324,41 @@ class RentalController extends Controller {
         }
         
         // validating date
-        function validateDate($date) {
+        public function validateDate ($date) {
             $d = \DateTime::createFromFormat('d-m-Y', $date);
             
             if ($d && $d->format('d-m-Y') == $date) {
                 return TRUE;
             } else {
                 return FALSE;
+            }
+        }
+        
+        /*
+         * #662 - Rental History
+         */
+        public function getClientHistory ($id) {
+            $histories = array();
+            $client = \App\Client::where('id', '=', $id)->first();
+            
+            // check if exists
+            if ($client) {
+                $histories['id'] = $client->id;
+                $histories['name'] = $client->name;
+                $histories['gender'] = $client->gender;
+                
+                $rentals = DB::select("select c.brand, c.type, c.plate, r.date_from, r.date_to
+                            from rentals r 
+                            left join clients u on u.id = r.client_id
+                            left join cars c on
+                            c.id = r.car_id
+                            where client_id = ?", array($id));
+                
+                $histories['histories'] = $rentals;
+                
+                return $histories;
+            } else {
+                return "Client doesn't exist!";
             }
         }
 }
