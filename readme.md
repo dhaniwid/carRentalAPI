@@ -3,6 +3,15 @@ Total Tickets Done: 8
 
 This Car Rental API is built by using Laravel 5.0 framework for the purpose of pre-test interview held by one company. 
 
+Here are following tickets that have been done:
+1. CRUD Client: http://redmine.byte-stack.net/issues/660
+2. CRUD Car: http://redmine.byte-stack.net/issues/661
+3. CRUD Rental: http://redmine.byte-stack.net/issues/664
+4. Available Car Information: http://redmine.byte-stack.net/issues/669
+5. Rented Car Information: http://redmine.byte-stack.net/issues/668
+6. Car Rental History within specified month: http://redmine.byte-stack.net/issues/663
+7. Client Rental History: http://redmine.byte-stack.net/issues/662
+8. API Blueprint: http://redmine.byte-stack.net/issues/666
 
 ## How to Test
 
