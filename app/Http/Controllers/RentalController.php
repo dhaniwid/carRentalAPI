@@ -274,4 +274,39 @@ class RentalController extends Controller {
             
             return $error_messages;
         }
+        
+        /*
+         * 669-Available-Car-Information
+         */
+        public function getAvailableCars ($date) {
+            // check date format
+            if (!$this->validateDate($date)) {
+                return "Please set date on correct format (DD-MM-YYYY)";
+            }
+            
+            // check whether car is being rented at selected date
+            $cars = DB::select("select c.* 
+                        from rentals r 
+                        left join cars c on c.id = r.car_id
+                        where 1=1
+                        and r.car_id NOT IN (select car_id from rentals 
+                        where date_format(date_from, '%d-%m-%Y') = ? or date_format(date_to, '%d-%m-%Y') = ?);", array($date, $date));
+            
+            if ($cars) {
+                return array("date" => $date, "free_cars" => $cars);
+            } else {
+                return array("date" => $date, "free_cars" => "No cars available");
+            }
+        }
+        
+        // validating date
+        function validateDate($date) {
+            $d = \DateTime::createFromFormat('d-m-Y', $date);
+            
+            if ($d && $d->format('d-m-Y') == $date) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
 }
